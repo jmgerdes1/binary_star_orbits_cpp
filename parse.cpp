@@ -22,6 +22,7 @@ void tokenize(std::string const &str, const char delim, std::vector<std::string>
 
 export std::vector<Star> vec_star;
 export std::vector<Planet> vec_planet;
+export double a;            //Distance between the stars 
 Star object_star;
 Planet object_planet;
 
@@ -65,6 +66,9 @@ bool parser(std::string file_name){
             }
             i = i + 2 * num_planet_prop;
             vec_planet.push_back(object_planet);
+        } else if(list[i]=="STELLAR_DISTANCE:"){
+            a = std::stod(list[i+1]);
+            i++;
         }
     }
 }

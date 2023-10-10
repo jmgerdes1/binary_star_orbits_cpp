@@ -2,7 +2,12 @@
 import parse;
 import eqp_lines;
 int main(){
+    std::cout << "Running parser: \n";
     parse_run("config_files/solarsystem.config");
-    std::cout << vec_star[0].mass << std::endl;
-    eqp("data/solarsystem.dat", vec_star);
+    std::cout << "      Done\n";
+//  std::cout << vec_star[0].mass << std::endl;
+//  std::cout << a << std::endl;
+    std::cout << "Running gravitational potential calculation: \n";
+    eqp("data/solarsystem.dat", vec_star, a);
+    std::cout << "      Done\n";
 }
