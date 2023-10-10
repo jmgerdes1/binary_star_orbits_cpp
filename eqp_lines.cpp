@@ -15,6 +15,7 @@ export bool eqp(std::string const&file_name, std::vector<Star> vec_star, double 
         std::cout << "Failed to Open File\n";
         return false;
     }
+    return true;
 }
 
 export std::vector<double> center_of_mass(std::vector<Star> vec_star, double a){

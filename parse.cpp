@@ -16,7 +16,7 @@ int num_planet_prop=1;        //Number of properties for each planet in config f
 //        double mass;
 //};
 
-export int parse_run(std::string const&file_name);
+export bool parse_run(std::string const&file_name);
 bool parser(std::string file_name);
 void tokenize(std::string const &str, const char delim, std::vector<std::string> &out);
 
@@ -26,10 +26,11 @@ export double a;            //Distance between the stars
 Star object_star;
 Planet object_planet;
 
-export int parse_run(std::string const &file_name){
+export bool parse_run(std::string const &file_name){
     if(!parser(file_name)){
-        return EXIT_FAILURE;
+        return false;
     }
+    return true;
 }
 
 bool parser(std::string file_name){
@@ -71,6 +72,7 @@ bool parser(std::string file_name){
             i++;
         }
     }
+    return true;
 }
 
 void tokenize(std::string const &str, const char delim, std::vector<std::string> &out){
