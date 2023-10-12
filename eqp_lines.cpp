@@ -16,7 +16,7 @@ export bool eqp(std::string const&file_name, std::vector<Star> vec_star, double 
 
     double dx = std::abs(x_range[0]-x_range[1])/x_steps;
     double dy = std::abs(y_range[0]-y_range[1])/y_steps;
-    double A = -1.0/2.0 * (const_G.astro * (vec_star[0].mass + vec_star[1].mass))/pow(a,3.0);
+    double A = 1.0/2.0 * (const_G.astro * (vec_star[0].mass + vec_star[1].mass))/pow(a,3.0);
 
     p = center_of_mass(vec_star, a);
 
@@ -25,14 +25,14 @@ export bool eqp(std::string const&file_name, std::vector<Star> vec_star, double 
         return false;
     }
 
-    std::cout << const_G.astro << std::endl;
+    std::cout << const_G.standard << std::endl << const_G.astro << std::endl;
 
     for(int i = 0; i <= x_steps; i++){
         x_pos = x_range[0] + i*dx;
         for(int j = 0; j <= y_steps; j++){
             y_pos = y_range[0] + j*dy;
             S = func_S(x_pos, y_pos, p);
-            Myfile << x_pos <<  " " << y_pos << " " << -const_G.astro*(vec_star[0].mass) << std::endl;
+            Myfile << x_pos <<  " " << y_pos << " " << -const_G.astro*(vec_star[0].mass/S[0]+vec_star[1].mass/S[0])-A*(pow(x_pos,2.0)+pow(y_pos,2.0)) << std::endl;
         }
     }
 
