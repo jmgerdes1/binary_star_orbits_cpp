@@ -16,45 +16,39 @@ export bool eqp(std::string const&file_name, std::vector<Star> vec_star, double 
 
     double dx = std::abs(x_range[0]-x_range[1])/x_steps;
     double dy = std::abs(y_range[0]-y_range[1])/y_steps;
-    double A = 1.0/2.0 * (const_G.standard * (vec_star[0].mass + vec_star[1].mass))/pow(a,3.0);
-
-    p = center_of_mass(vec_star, a);
+    double w2 = const_G.astro*(vec_star[0].mass+vec_star[1].mass)/pow(a,3.0);
 
     if(!Myfile.is_open()){
         std::cout << "Failed to Open File\n";
         return false;
     }
 
-    S = func_S(p[0], 0., p);
-    std::cout << p[0] << " " << p[1] << " " << p[0] + p[1] << std::endl;
-    std::cout << S[0] << std::endl;
-
+    p = center_of_mass(vec_star,a);
 
     for(int i = 0; i <= x_steps; i++){
         x_pos = x_range[0] + i*dx;
-//      for(int j = 0; j <= y_steps; j++){
-//          y_pos = y_range[0] + j*dy;
-            y_pos = 0.0;
-            S = func_S(x_pos, y_pos, p);
-            Myfile << x_pos <<  " " << y_pos << " " << (-const_G.standard*(vec_star[0].mass/S[0]+vec_star[1].mass/S[1])-A*(pow(x_pos,2.0)+pow(y_pos,2.0))) << std::endl;
-//      }
+        for(int j = 0; j <= y_steps; j++){
+            y_pos = y_range[0] + j*dy;
+            S = func_S(x_pos,y_pos,p);
+            Myfile << x_pos << " " << y_pos << " " << -const_G.astro*(vec_star[0].mass/S[0]+vec_star[1].mass/S[1])-1./2.*w2*sqrt(pow(x_pos,2)+pow(y_pos,2)) << std::endl;
+        }
     }
 
-    return true;
+
+    return(1);
 }
 
 std::vector<double> center_of_mass(std::vector<Star> vec_star, double a){
     std::vector<double> position;
-    position.push_back(pow((1-vec_star[0].mass/vec_star[1].mass),-1.0)*a);
-    position.push_back(a+position[0]);
-//    position[0] = -position[0];
+    position.push_back((a*vec_star[1].mass)/(vec_star[1].mass+vec_star[0].mass));
+    position.push_back((a*vec_star[0].mass)/(vec_star[0].mass+vec_star[1].mass));
     return position;
 }
 
 std::vector<double> func_S(double x, double y, std::vector<double> r){
     std::vector<double> S;
     double h = sqrt(pow(x,2.0)+pow(y,2.0));
-    S.push_back(pow(r[0],2.0)+pow(h,2)+2*(-1*r[0])*x);
-    S.push_back(pow(r[1],2.0)+pow(h,2)-2*r[1]*x);
+    S.push_back(sqrt(pow(r[0],2.0)+pow(h,2.0)+2*r[0]*x));
+    S.push_back(sqrt(pow(r[1],2.0)+pow(h,2.0)-2*r[1]*x));
     return S;
 }
