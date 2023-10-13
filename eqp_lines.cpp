@@ -32,6 +32,7 @@ export bool eqp(std::string const&file_name, std::vector<Star> vec_star, double 
             S = func_S(x_pos,y_pos,p);
             Myfile << x_pos << " " << y_pos << " " << -const_G.astro*(vec_star[0].mass/S[0]+vec_star[1].mass/S[1])-1./2.*w2*sqrt(pow(x_pos,2)+pow(y_pos,2)) << std::endl;
         }
+        Myfile << std::endl;
     }
 
 
