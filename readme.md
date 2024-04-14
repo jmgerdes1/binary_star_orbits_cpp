@@ -1,3 +1,3 @@
-Just putting this here as my first file- will put actual info in here soon!
+So far, capable of parsing config file for system information and calculating 1D gravitational potential of a binary system.
 
-Test to make sure I can push from my laptop!
+Working on porting to python. Planning on using existing monte carlo integration algorithms and TKINTER to make an application
