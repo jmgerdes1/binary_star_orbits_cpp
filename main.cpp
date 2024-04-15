@@ -1,6 +1,7 @@
 #include "main.h"
 import parse;
 import eqp_lines;
+
 int main(){
     std::cout << "Running parser: \n";
     parse_run("config_files/solarsystem.config");
