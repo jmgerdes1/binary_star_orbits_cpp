@@ -1,3 +1,4 @@
+//parser for star system config files
 module;
 #include "main.h"
 export module parse;
