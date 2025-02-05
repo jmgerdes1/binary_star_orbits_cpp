@@ -1,4 +1,4 @@
-Project Abandoned in C++ in favor of writing it in python
+PROJECT ABANDONED IN C++ IN FAVOR OF DESIGNING IT USING PYTHON
 
 So far, capable of parsing config file for system information and calculating 1D gravitational potential of a binary system.
 
